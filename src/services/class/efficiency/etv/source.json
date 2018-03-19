@@ -1,0 +1,52 @@
+{
+  "wn8": [
+    {
+      "title": "XVM (load last)",
+      "url": "https://static.modxvm.com/wn8-data-exp/json/wn8exp.json"
+    },
+    {
+      "title": "XVM (2018-02-01)",
+      "url": "https://static.modxvm.com/wn8-data-exp/json/wn8exp-2018-02-01.json"
+    },
+    {
+      "title": "XVM (2018-01-01)",
+      "url": "https://static.modxvm.com/wn8-data-exp/json/wn8exp-2018-01-01.json"
+    },
+    {
+      "title": "XVM (2017-12-01)",
+      "url": "https://static.modxvm.com/wn8-data-exp/json/wn8exp-2017-12-01.json"
+    },
+    {
+      "title": "XVM (2017-11-01)",
+      "url": "https://static.modxvm.com/wn8-data-exp/json/wn8exp-2017-11-01.json"
+    },
+    {
+      "title": "Ver 15",
+      "url": "./15.json"
+    },
+    {
+      "title": "Ver 20",
+      "url": "./20.json"
+    },
+    {
+      "title": "Ver 25",
+      "url": "./25.json"
+    },
+    {
+      "title": "Ver 28",
+      "url": "./28.json"
+    },
+    {
+      "title": "Ver 29",
+      "url": "./29.json"
+    },
+    {
+      "title": "Ver 29.1",
+      "url": "./29.1.json"
+    },
+    {
+      "title": "Ver 30",
+      "url": "./30.json"
+    }
+  ]
+}

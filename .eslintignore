@@ -1,0 +1,5 @@
+build/*.js
+!build/expended-tank-values-plugin.js
+!build/loaders/*
+config/*.js
+dist/*

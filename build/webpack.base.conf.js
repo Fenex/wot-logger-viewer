@@ -1,0 +1,109 @@
+var path = require('path')
+var utils = require('./utils')
+var config = require('../config')
+var vueLoaderConfig = require('./vue-loader.conf')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
+var UglifyJS = require('uglify-es')
+
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
+
+module.exports = {
+  plugins: [
+    new CopyWebpackPlugin(
+      [
+        { // used by ratings to loading expended tank values
+          from: path.resolve(__dirname, '../src/services/class/efficiency/jsonp_loader.js'),
+          to: path.join(config.build.assetsSubDirectory, 'js/jsonp-loader.js'),
+          force: true,
+          transform (content) {
+            var result = UglifyJS.minify(content.toString())
+            if (result.error) return content
+            return result.code
+          }
+        }
+      ]
+    )
+  ],
+  entry: {
+    app: './src/main.js'
+  },
+  output: {
+    path: config.build.assetsRoot,
+    filename: '[name].js',
+    publicPath: process.env.NODE_ENV === 'production'
+      ? config.build.assetsPublicPath
+      : config.dev.assetsPublicPath
+  },
+  externals: {
+    lodash: "_",
+    vue: "Vue",
+    Dexie: "Dexie",
+    pako: "pako",
+    moment: "moment",
+    'vue-router': "VueRouter",
+    jquery: "$",
+    'element-ui': "ELEMENT"
+  },
+  resolve: {
+    extensions: ['.js', '.vue', '.json'],
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js',
+      '@': resolve('src')
+    }
+  },
+  resolveLoader: {
+    alias: {
+      cssRelativePathLoader: path.join(__dirname, "./loaders/css-relative-path-loader")
+    }
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        include: [resolve('src'), resolve('test')],
+        options: {
+          formatter: require('eslint-friendly-formatter')
+        }
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: vueLoaderConfig
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        include: [resolve('src'), resolve('test')],
+        exclude: '/node_modules/'
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: utils.assetsPath('img/[name].[hash:7].[ext]')
+        }
+      },
+      {
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: utils.assetsPath('media/[name].[hash:7].[ext]')
+        }
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+        }
+      }
+    ]
+  }
+}
