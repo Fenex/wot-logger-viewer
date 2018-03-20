@@ -211,10 +211,10 @@ const Component = {
       })
     })
 
-    window.addEventListener('resize', () => {
+    window.addEventListener('resize', _.debonce(() => {
       this.window.height = document.documentElement.clientHeight
       this.window.width = document.documentElement.clientWidth
-    })
+    }, 500))
   },
   created () {
     this.applyFilters()
