@@ -211,7 +211,7 @@ const Component = {
       })
     })
 
-    window.addEventListener('resize', _.debonce(() => {
+    window.addEventListener('resize', _.debounce(() => {
       this.window.height = document.documentElement.clientHeight
       this.window.width = document.documentElement.clientWidth
     }, 500))
